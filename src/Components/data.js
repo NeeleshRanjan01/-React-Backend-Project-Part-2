@@ -7,7 +7,7 @@ const Data = (props) => {
 
     useEffect (()=>{
         async function Backend () {
-            let content=await fetch("https://nrx-react-backend-project.herokuapp.com/")
+            let content=await fetch("https://light-puce-jaguar.cyclic.app")
             content= await content.json()
             console.log(content);
             setData(content)
@@ -15,16 +15,18 @@ const Data = (props) => {
         Backend()
     },[])
 
-       
-    return (
-        <>
-        <store.Provider value={[data, setData]}>
-            {props.children}
-        </store.Provider>
+    console.log(data);
 
-        </>
-    )
-
+    if(data.length>0){
+        return (
+            <>
+            <store.Provider value={[data, setData]}>
+                {props.children}
+            </store.Provider>
+            </>
+        )
+    }
+    
 }
 
 export default Data;
